@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Loan Estimator | Guna Banka</title>
+    <meta
+      name="description"
+      content="Interactive student loan estimator by Guna Banka that helps students understand how debt levels can affect repayment timelines."
+    />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="site-title" href="index.html">My portfolio</a>
+        <button class="menu-btn" data-menu-btn aria-label="Open menu" aria-expanded="false">Menu</button>
+        <nav class="nav-links" data-nav aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="student-loans.html" aria-current="page">Student Loans</a>
+          <a href="about.html">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-hero">
+        <div class="container loan-hero-grid">
+          <div>
+            <p class="breadcrumb"><a href="index.html">Home</a> / <span>Student Loans</span></p>
+            <p class="kicker">Student Support Tool</p>
+            <h1>See how long student debt could stay with you.</h1>
+            <p class="lead">
+              This website helps students enter a loan balance and get a simple repayment estimate based on debt ranges,
+              turning abstract loan numbers into something easier to understand.
+            </p>
+            <div class="hero-meta" aria-label="Student loan website summary">
+              <div class="hero-meta-item">
+                <span class="hero-meta-value">$39,550</span>
+                <span class="hero-meta-label">2025 average balance</span>
+              </div>
+              <div class="hero-meta-item">
+                <span class="hero-meta-value">20 years</span>
+                <span class="hero-meta-label">estimated repayment window</span>
+              </div>
+              <div class="hero-meta-item">
+                <span class="hero-meta-value">12</span>
+                <span class="hero-meta-label">dataset points used</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="card loan-summary-card">
+            <p class="mini-label">What this page does</p>
+            <h2>Built to help students understand debt more clearly</h2>
+            <ul class="list-check">
+              <li>Lets visitors enter their own loan balance.</li>
+              <li>Shows a quick repayment estimate using debt ranges.</li>
+              <li>Frames borrowing in a practical, less abstract way.</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section section-tight">
+        <div class="container card loan-tool-card">
+          <div class="section-head-inline">
+            <div>
+              <p class="kicker">Interactive Estimator</p>
+              <h2 class="section-title">Enter a loan balance and get a repayment estimate</h2>
+            </div>
+            <p class="section-caption">Educational benchmark based on debt ranges, not personalized financial advice.</p>
+          </div>
+
+          <div class="loan-tool-grid">
+            <div>
+              <label for="loanBalance">Student loan balance</label>
+              <input id="loanBalance" class="demo-input" type="number" min="0" max="500000" step="500" value="39550" />
+              <input id="loanRange" class="loan-range" type="range" min="0" max="500000" step="500" value="39550" />
+              <div class="btn-row">
+                <button class="btn btn-primary" id="calculateLoan" type="button">Estimate repayment</button>
+                <button class="btn btn-secondary" id="resetLoan" type="button">Reset</button>
+              </div>
+              <p class="status-text" id="loanStatus" aria-live="polite">Ready to estimate a repayment window.</p>
+            </div>
+
+            <div class="loan-results-grid">
+              <article class="card loan-result-card">
+                <p class="mini-label">Estimated repayment time</p>
+                <h3 id="loanYears">~20 years</h3>
+                <p id="loanWindowText">Long-term repayment window</p>
+              </article>
+              <article class="card loan-result-card">
+                <p class="mini-label">Debt range matched</p>
+                <h3 id="loanRangeMatch">$20,000 to $39,999</h3>
+                <p>Based on the repayment-period ranges used in this project.</p>
+              </article>
+              <article class="card loan-result-card">
+                <p class="mini-label">Compared with 2025 average debt</p>
+                <h3 id="loanAverageCompare">Right at the average</h3>
+                <p id="loanMonthlyPace">Principal-only pace: about $165/mo over 20 years.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container about-grid">
+          <article class="card">
+            <p class="kicker">Why This Matters</p>
+            <h2>Debt becomes easier to understand when it feels personal</h2>
+            <p>
+              Instead of showing only charts, this version lets students enter their own number and see how repayment can
+              stretch over time as debt grows.
+            </p>
+          </article>
+          <article class="card">
+            <p class="kicker">What Changed</p>
+            <h2>Focused experience, simpler tool</h2>
+            <p>
+              This version keeps the experience centered on one clear task: helping students estimate repayment in a
+              simple, usable format.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container card">
+          <p class="kicker">Project Notes</p>
+          <h2>How this fits the rest of my work</h2>
+          <p>
+            This project extends the same mission as the portfolio: use technology to help students make better career and
+            life decisions with clearer information and lower friction.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="projects.html#student-loan-site">View this project in my portfolio</a>
+            <a class="btn btn-secondary" href="index.html#other-help">Back to homepage section</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">© <span data-year></span> Guna Banka — Building practical tools for students.</div>
+    </footer>
+
+    <button class="back-to-top" type="button" id="backToTop" aria-label="Back to top">↑ Top</button>
+
+    <script src="script.js"></script>
+  </body>
+</html>

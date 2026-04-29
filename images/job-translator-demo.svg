@@ -1,0 +1,42 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="675" rx="28" fill="#F8FBFF"/>
+  <rect x="34" y="34" width="1132" height="607" rx="24" fill="white" stroke="#CFE0FF" stroke-width="2"/>
+
+  <text x="72" y="96" fill="#1E293B" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="700">Job Description Translator</text>
+  <text x="72" y="126" fill="#64748B" font-size="16" font-family="Inter, Arial, sans-serif">Turns recruiter language into plain student-ready requirements and action steps</text>
+
+  <rect x="72" y="160" width="360" height="438" rx="20" fill="#FBFCFF" stroke="#D9E5FF"/>
+  <text x="96" y="202" fill="#2563EB" font-size="18" font-family="Inter, Arial, sans-serif" font-weight="700">Original posting</text>
+  <rect x="96" y="226" width="148" height="26" rx="13" fill="#EEF4FF"/>
+  <text x="118" y="244" fill="#1D4ED8" font-size="13" font-family="Inter, Arial, sans-serif" font-weight="700">Dense language</text>
+  <rect x="96" y="282" width="292" height="13" rx="6.5" fill="#E2E8F0"/>
+  <rect x="96" y="310" width="274" height="13" rx="6.5" fill="#E2E8F0"/>
+  <rect x="96" y="338" width="286" height="13" rx="6.5" fill="#E2E8F0"/>
+  <rect x="96" y="366" width="248" height="13" rx="6.5" fill="#E2E8F0"/>
+  <rect x="96" y="394" width="264" height="13" rx="6.5" fill="#E2E8F0"/>
+  <rect x="96" y="450" width="304" height="72" rx="16" fill="white" stroke="#FCA5A5" stroke-width="2"/>
+  <text x="118" y="478" fill="#B91C1C" font-size="14" font-family="Inter, Arial, sans-serif" font-weight="700">Why students struggle</text>
+  <text x="118" y="502" fill="#7F1D1D" font-size="13" font-family="Inter, Arial, sans-serif">The posting mixes tools,</text>
+  <text x="118" y="520" fill="#7F1D1D" font-size="13" font-family="Inter, Arial, sans-serif">tasks, and expectations all together.</text>
+
+  <rect x="462" y="160" width="668" height="188" rx="20" fill="#EEF4FF"/>
+  <text x="488" y="202" fill="#1D4ED8" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="700">Plain-language meaning</text>
+  <text x="488" y="246" fill="#334155" font-size="20" font-family="Inter, Arial, sans-serif">You need SQL, dashboards, and strong communication</text>
+  <text x="488" y="278" fill="#334155" font-size="20" font-family="Inter, Arial, sans-serif">to explain findings clearly to non-technical teams.</text>
+  <rect x="488" y="300" width="152" height="26" rx="13" fill="#DBEAFE"/>
+  <text x="510" y="318" fill="#1D4ED8" font-size="13" font-family="Inter, Arial, sans-serif" font-weight="700">Tools to show</text>
+  <rect x="650" y="300" width="172" height="26" rx="13" fill="#DCFCE7"/>
+  <text x="672" y="318" fill="#166534" font-size="13" font-family="Inter, Arial, sans-serif" font-weight="700">Proof to include</text>
+
+  <rect x="462" y="372" width="668" height="226" rx="20" fill="#F5F3FF"/>
+  <text x="488" y="414" fill="#7C3AED" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="700">2-week action plan</text>
+
+  <rect x="488" y="438" width="616" height="36" rx="12" fill="white"/>
+  <text x="506" y="461" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif">Week 1: review SQL basics and recreate one dashboard project.</text>
+  <rect x="488" y="486" width="616" height="36" rx="12" fill="white"/>
+  <text x="506" y="509" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif">Week 1: practice explaining findings to a non-technical audience.</text>
+  <rect x="488" y="534" width="302" height="44" rx="14" fill="#EFE9FF"/>
+  <rect x="802" y="534" width="302" height="44" rx="14" fill="#E8F9F1"/>
+  <text x="522" y="561" fill="#7C3AED" font-size="14" font-family="Inter, Arial, sans-serif" font-weight="700">Top keyword cluster: SQL + dashboards</text>
+  <text x="832" y="561" fill="#166534" font-size="14" font-family="Inter, Arial, sans-serif" font-weight="700">Next move: tailor one resume bullet</text>
+</svg>

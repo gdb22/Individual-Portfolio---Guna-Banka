@@ -1,0 +1,26 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="675" rx="28" fill="#F6F4EF"/>
+  <rect x="34" y="34" width="1132" height="607" rx="24" fill="#FFFEFC" stroke="#D9D4CA" stroke-width="2"/>
+  <text x="72" y="104" fill="#151515" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="700">Student Loan Reality Lab</text>
+  <text x="72" y="140" fill="#5C5B57" font-size="20" font-family="Inter, Arial, sans-serif">See how long student debt could stay with you.</text>
+  <rect x="72" y="182" width="508" height="374" rx="18" fill="#FBFAF7" stroke="#DDD7CC"/>
+  <text x="98" y="222" fill="#20498A" font-size="18" font-family="Inter, Arial, sans-serif" font-weight="700">Enter a loan balance and get a repayment estimate.</text>
+  <text x="98" y="268" fill="#5C5B57" font-size="16" font-family="Inter, Arial, sans-serif">Student loan balance</text>
+  <rect x="98" y="286" width="300" height="52" rx="14" fill="white" stroke="#D8D0C2"/>
+  <text x="120" y="320" fill="#151515" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="700">$39,550</text>
+  <rect x="98" y="370" width="420" height="14" rx="7" fill="#E7E1D6"/>
+  <rect x="98" y="370" width="286" height="14" rx="7" fill="#20498A"/>
+  <text x="98" y="424" fill="#5C5B57" font-size="16" font-family="Inter, Arial, sans-serif">Estimated repayment time</text>
+  <text x="98" y="468" fill="#151515" font-size="44" font-family="Inter, Arial, sans-serif" font-weight="800">~20 years</text>
+  <text x="98" y="504" fill="#5C5B57" font-size="18" font-family="Inter, Arial, sans-serif">Right at the 2025 average debt in the dataset</text>
+  <rect x="620" y="182" width="510" height="166" rx="18" fill="#F1EEE7"/>
+  <text x="646" y="224" fill="#151515" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="700">Why this matters</text>
+  <text x="646" y="266" fill="#5C5B57" font-size="18" font-family="Inter, Arial, sans-serif">Students can enter their own loan balance and see how</text>
+  <text x="646" y="296" fill="#5C5B57" font-size="18" font-family="Inter, Arial, sans-serif">repayment time expands as debt grows.</text>
+  <rect x="620" y="378" width="510" height="178" rx="18" fill="#FBFAF7" stroke="#DDD7CC"/>
+  <text x="646" y="420" fill="#20498A" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="700">AI Advisor</text>
+  <text x="646" y="458" fill="#151515" font-size="18" font-family="Inter, Arial, sans-serif">Hi! I’m your student loan advisor. Ask me anything</text>
+  <text x="646" y="486" fill="#151515" font-size="18" font-family="Inter, Arial, sans-serif">about repayment strategies or debt management.</text>
+  <rect x="646" y="514" width="200" height="14" rx="7" fill="#D9D4CA"/>
+  <rect x="858" y="514" width="154" height="14" rx="7" fill="#D9D4CA"/>
+</svg>

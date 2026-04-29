@@ -1,0 +1,55 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="675" rx="28" fill="#F8FBFF"/>
+  <rect x="34" y="34" width="1132" height="607" rx="24" fill="white" stroke="#CFE0FF" stroke-width="2"/>
+
+  <text x="72" y="96" fill="#1E293B" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="700">Cover Letter Feedback</text>
+  <text x="72" y="126" fill="#64748B" font-size="16" font-family="Inter, Arial, sans-serif">Student-friendly review with clearer evidence, tone fixes, and revision notes</text>
+
+  <rect x="72" y="160" width="654" height="440" rx="20" fill="#FBFCFF" stroke="#D9E5FF"/>
+  <text x="96" y="200" fill="#64748B" font-size="18" font-family="Inter, Arial, sans-serif" font-weight="700">Draft Cover Letter</text>
+
+  <rect x="96" y="224" width="136" height="26" rx="13" fill="#EEF4FF"/>
+  <text x="118" y="242" fill="#1D4ED8" font-size="13" font-family="Inter, Arial, sans-serif" font-weight="700">Needs specificity</text>
+  <rect x="244" y="224" width="120" height="26" rx="13" fill="#F5F3FF"/>
+  <text x="267" y="242" fill="#7C3AED" font-size="13" font-family="Inter, Arial, sans-serif" font-weight="700">Tone improved</text>
+
+  <text x="96" y="286" fill="#334155" font-size="20" font-family="Inter, Arial, sans-serif">Dear Hiring Team, I am excited to apply for this role</text>
+  <text x="96" y="318" fill="#334155" font-size="20" font-family="Inter, Arial, sans-serif">because I am hardworking and eager to learn. In school</text>
+  <text x="96" y="350" fill="#334155" font-size="20" font-family="Inter, Arial, sans-serif">and student projects, I have worked with other people</text>
+  <text x="96" y="382" fill="#334155" font-size="20" font-family="Inter, Arial, sans-serif">and tried my best to stay organized and help the team.</text>
+
+  <rect x="94" y="297" width="514" height="33" rx="10" fill="#FEE2E2" fill-opacity="0.85"/>
+  <rect x="94" y="360" width="470" height="33" rx="10" fill="#FEF3C7" fill-opacity="0.92"/>
+
+  <rect x="752" y="160" width="378" height="214" rx="20" fill="#E8F9F1"/>
+  <text x="776" y="200" fill="#166534" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="700">Improved paragraph</text>
+  <text x="776" y="240" fill="#166534" font-size="19" font-family="Inter, Arial, sans-serif">I’m excited to apply my project coordination experience</text>
+  <text x="776" y="270" fill="#166534" font-size="19" font-family="Inter, Arial, sans-serif">from leading a 5-person campus analytics team, where</text>
+  <text x="776" y="300" fill="#166534" font-size="19" font-family="Inter, Arial, sans-serif">I helped organize tasks, communicate progress clearly,</text>
+  <text x="776" y="330" fill="#166534" font-size="19" font-family="Inter, Arial, sans-serif">and deliver results ahead of schedule.</text>
+
+  <rect x="752" y="394" width="180" height="176" rx="18" fill="#EEF4FF"/>
+  <rect x="950" y="394" width="180" height="176" rx="18" fill="#F5F3FF"/>
+  <text x="776" y="432" fill="#1D4ED8" font-size="16" font-family="Inter, Arial, sans-serif" font-weight="700">Role match</text>
+  <text x="776" y="486" fill="#0F172A" font-size="38" font-family="Inter, Arial, sans-serif" font-weight="800">8.7/10</text>
+  <text x="776" y="522" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif">Better alignment to</text>
+  <text x="776" y="544" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif">teamwork + execution</text>
+
+  <text x="974" y="432" fill="#7C3AED" font-size="16" font-family="Inter, Arial, sans-serif" font-weight="700">Evidence check</text>
+  <text x="974" y="486" fill="#0F172A" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="800">Grounded</text>
+  <text x="974" y="522" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif">Uses real student</text>
+  <text x="974" y="544" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif">experience instead of hype</text>
+
+  <rect x="752" y="584" width="378" height="32" rx="16" fill="#F1F5F9"/>
+  <text x="774" y="605" fill="#475569" font-size="14" font-family="Inter, Arial, sans-serif">Next step: add one measurable result to strengthen credibility</text>
+
+  <rect x="520" y="278" width="176" height="66" rx="16" fill="white" stroke="#FCA5A5" stroke-width="2"/>
+  <text x="538" y="304" fill="#B91C1C" font-size="14" font-family="Inter, Arial, sans-serif" font-weight="700">Too generic</text>
+  <text x="538" y="326" fill="#7F1D1D" font-size="13" font-family="Inter, Arial, sans-serif">Explain what you did,</text>
+  <text x="538" y="344" fill="#7F1D1D" font-size="13" font-family="Inter, Arial, sans-serif">not just that you care.</text>
+
+  <rect x="468" y="340" width="228" height="66" rx="16" fill="white" stroke="#FACC15" stroke-width="2"/>
+  <text x="486" y="366" fill="#A16207" font-size="14" font-family="Inter, Arial, sans-serif" font-weight="700">Missing proof</text>
+  <text x="486" y="388" fill="#854D0E" font-size="13" font-family="Inter, Arial, sans-serif">Add a project, role, or</text>
+  <text x="486" y="406" fill="#854D0E" font-size="13" font-family="Inter, Arial, sans-serif">result the recruiter can trust.</text>
+</svg>

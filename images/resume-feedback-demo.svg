@@ -1,0 +1,54 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="675" rx="28" fill="#F8FBFF"/>
+  <rect x="34" y="34" width="1132" height="607" rx="24" fill="white" stroke="#CFE0FF" stroke-width="2"/>
+
+  <text x="72" y="96" fill="#1E3A8A" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="700">Resume Feedback Tool</text>
+  <text x="72" y="126" fill="#64748B" font-size="16" font-family="Inter, Arial, sans-serif">Clearer bullets, stronger evidence, and recruiter-friendly phrasing</text>
+
+  <rect x="72" y="160" width="296" height="438" rx="20" fill="#F6F9FF" stroke="#D9E5FF"/>
+  <text x="96" y="202" fill="#2563EB" font-size="18" font-family="Inter, Arial, sans-serif" font-weight="700">Review summary</text>
+  <rect x="96" y="226" width="248" height="92" rx="18" fill="white" stroke="#D8E2F7"/>
+  <text x="118" y="258" fill="#1D4ED8" font-size="17" font-family="Inter, Arial, sans-serif" font-weight="700">Impact score</text>
+  <text x="118" y="296" fill="#0F172A" font-size="38" font-family="Inter, Arial, sans-serif" font-weight="800">8.1 / 10</text>
+
+  <rect x="96" y="344" width="248" height="14" rx="7" fill="#E6EEFF"/>
+  <rect x="96" y="344" width="204" height="14" rx="7" fill="#2563EB"/>
+  <text x="96" y="388" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif">Strengths</text>
+  <rect x="96" y="404" width="106" height="26" rx="13" fill="#DBEAFE"/>
+  <text x="118" y="422" fill="#1D4ED8" font-size="13" font-family="Inter, Arial, sans-serif" font-weight="700">Action verbs</text>
+  <rect x="210" y="404" width="94" height="26" rx="13" fill="#DCFCE7"/>
+  <text x="232" y="422" fill="#166534" font-size="13" font-family="Inter, Arial, sans-serif" font-weight="700">Readable</text>
+
+  <text x="96" y="468" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif">Needs work</text>
+  <rect x="96" y="484" width="112" height="26" rx="13" fill="#FEE2E2"/>
+  <text x="116" y="502" fill="#B91C1C" font-size="13" font-family="Inter, Arial, sans-serif" font-weight="700">More evidence</text>
+  <rect x="216" y="484" width="98" height="26" rx="13" fill="#FEF3C7"/>
+  <text x="238" y="502" fill="#A16207" font-size="13" font-family="Inter, Arial, sans-serif" font-weight="700">Add metrics</text>
+
+  <rect x="398" y="160" width="732" height="438" rx="20" fill="#FBFCFF" stroke="#D9E5FF"/>
+  <text x="424" y="202" fill="#1E293B" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="700">Before → after rewrite</text>
+
+  <rect x="424" y="228" width="680" height="104" rx="18" fill="#EEF4FF"/>
+  <text x="448" y="262" fill="#64748B" font-size="16" font-family="Inter, Arial, sans-serif" font-weight="700">Original bullet</text>
+  <text x="448" y="302" fill="#334155" font-size="21" font-family="Inter, Arial, sans-serif">Worked on club projects and helped organize events.</text>
+
+  <rect x="424" y="356" width="680" height="124" rx="18" fill="#E8F9F1"/>
+  <text x="448" y="390" fill="#166534" font-size="16" font-family="Inter, Arial, sans-serif" font-weight="700">Improved bullet</text>
+  <text x="448" y="430" fill="#166534" font-size="21" font-family="Inter, Arial, sans-serif">Coordinated 4 club projects and 2 campus events,</text>
+  <text x="448" y="462" fill="#166534" font-size="21" font-family="Inter, Arial, sans-serif">improving attendance by 35% through targeted outreach.</text>
+
+  <rect x="424" y="504" width="214" height="70" rx="16" fill="white" stroke="#D8E2F7"/>
+  <rect x="658" y="504" width="214" height="70" rx="16" fill="white" stroke="#D8E2F7"/>
+  <rect x="892" y="504" width="212" height="70" rx="16" fill="white" stroke="#D8E2F7"/>
+  <text x="446" y="532" fill="#1D4ED8" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="700">Why it improved</text>
+  <text x="446" y="556" fill="#475569" font-size="14" font-family="Inter, Arial, sans-serif">Shows action + scale</text>
+  <text x="680" y="532" fill="#7C3AED" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="700">Recruiter value</text>
+  <text x="680" y="556" fill="#475569" font-size="14" font-family="Inter, Arial, sans-serif">Easier to scan quickly</text>
+  <text x="914" y="532" fill="#166534" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="700">Next step</text>
+  <text x="914" y="556" fill="#475569" font-size="14" font-family="Inter, Arial, sans-serif">Add 1 more quantified bullet</text>
+
+  <rect x="876" y="248" width="206" height="70" rx="16" fill="white" stroke="#FCA5A5" stroke-width="2"/>
+  <text x="896" y="276" fill="#B91C1C" font-size="14" font-family="Inter, Arial, sans-serif" font-weight="700">Too vague</text>
+  <text x="896" y="300" fill="#7F1D1D" font-size="13" font-family="Inter, Arial, sans-serif">No scale, result, or</text>
+  <text x="896" y="318" fill="#7F1D1D" font-size="13" font-family="Inter, Arial, sans-serif">clear ownership yet.</text>
+</svg>

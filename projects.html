@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects | Guna Banka</title>
+    <meta
+      name="description"
+      content="Practical AI projects by Guna Banka for student resumes, job description clarity, and cover letter writing."
+    />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="site-title" href="index.html">My portfolio</a>
+        <button class="menu-btn" data-menu-btn aria-label="Open menu" aria-expanded="false">Menu</button>
+        <nav class="nav-links" data-nav aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="projects.html" aria-current="page">Projects</a>
+          <a href="about.html">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-hero">
+        <div class="container">
+          <p class="breadcrumb"><a href="index.html">Home</a> / <span>Projects</span></p>
+          <p class="kicker">Project Portfolio</p>
+          <h1>AI tools built for real student job-market needs</h1>
+          <p class="lead">
+            Each project explains the real problem, product workflow, prompts, iterations, improvements, and stack.
+          </p>
+          <div class="project-jump-nav" aria-label="Jump to a project section">
+            <a class="jump-link" href="#resume-feedback">Resume Tool</a>
+            <a class="jump-link" href="#job-translator">Job Translator</a>
+            <a class="jump-link" href="#cover-letter-feedback">Cover Letter Feedback</a>
+            <a class="jump-link" href="#student-loan-site">Student Loans</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="resume-feedback">
+        <div class="container card">
+          <p class="mini-label">Use this section to review the problem, workflow, example output, and reflection.</p>
+          <h2>Project Title: AI Resume Feedback Tool</h2>
+          <p><strong>One-line description:</strong> AI reviewer that upgrades student resumes for internship relevance and clarity.</p>
+          <button class="screenshot screenshot-trigger" type="button" data-lightbox-src="images/resume-feedback-demo.svg" data-lightbox-alt="Mock demo of the AI Resume Feedback Tool showing resume scoring and rewritten bullet suggestions" aria-label="Open larger demo image for AI Resume Feedback Tool">
+            <img
+              class="project-demo-image"
+              src="images/resume-feedback-demo.svg"
+              alt="Mock demo of the AI Resume Feedback Tool showing resume scoring and rewritten bullet suggestions"
+            />
+          </button>
+          <div class="project-visual-note">
+            <p class="project-visual-label">What this visual shows</p>
+            <p>The mockup highlights the full feedback loop: resume scoring, a before-to-after bullet rewrite, recruiter-facing value, and the next improvement a student should make.</p>
+          </div>
+          <h3>Problem</h3>
+          <p><strong>What issue are you solving?</strong> Students submit resumes that are too generic, weak on impact, and hard for recruiters to scan quickly.</p>
+
+          <h3>Solution</h3>
+          <p>
+            <strong>What you built:</strong> A resume feedback app that scores sections, flags weak bullets, and generates targeted rewrites.
+          </p>
+          <p><strong>My role:</strong> designed flow, wrote prompts, built evaluation rubric, and tested output quality.</p>
+          <p><strong>Tools:</strong> React, OpenAI API, prompt templates, deployed web prototype.</p>
+
+          <h3>How it works</h3>
+          <ul class="list-check">
+            <li><strong>Input:</strong> Student resume + target internship role.</li>
+            <li><strong>AI:</strong> Model scores clarity/relevance and rewrites weak bullets using constraints.</li>
+            <li><strong>Output:</strong> Improved bullets, section scores, and a prioritized fix list.</li>
+          </ul>
+
+          <h3>Example Output</h3>
+          <div class="output-box">
+            <p><strong>Before:</strong> “Worked on club projects and helped organize events.”</p>
+            <p><strong>After:</strong> “Coordinated 4 club projects and 2 campus events, improving attendance by 35% through targeted outreach.”</p>
+            <p><strong>Result:</strong> Resume impact score improved from 5.8/10 to 8.1/10 in the prototype rubric.</p>
+          </div>
+
+          <h3>AI Workflow</h3>
+          <h4>Prompts</h4>
+          <div class="prompt-box">
+            “You are a university career coach. Review this resume for a sophomore applying to software internships.
+            Score each section from 1-10 for clarity and impact. Suggest 3 improved bullet points with metrics.”
+          </div>
+          <h4>Iteration</h4>
+          <div class="prompt-box">
+            “Rewrite this bullet point using action + context + measurable result. Keep it under 28 words and avoid
+            buzzwords.”
+          </div>
+          <h4>Improvements</h4>
+          <ul class="list-check">
+            <li>Tested STEM and business resumes to reduce inconsistent feedback style.</li>
+            <li>Added section-level scoring rubric to increase reliability.</li>
+            <li>Added stricter rewrite constraints to reduce vague suggestions.</li>
+          </ul>
+
+          <h3>Reflection</h3>
+          <p><strong>What I learned / what I’d improve:</strong> Strong constraints make outputs more useful. Next, I would add ATS keyword matching and side-by-side version compare for faster editing.</p>
+        </div>
+      </section>
+
+      <section class="section" id="job-translator">
+        <div class="container card">
+          <p class="mini-label">Use this section to review the problem, workflow, example output, and reflection.</p>
+          <h2>Project Title: AI Job Description Translator</h2>
+          <p><strong>One-line description:</strong> Translates dense job postings into clear student-ready requirements and action plans.</p>
+          <button class="screenshot screenshot-trigger" type="button" data-lightbox-src="images/job-translator-demo.svg" data-lightbox-alt="Mock demo of the AI Job Description Translator showing plain-language requirements and action plan" aria-label="Open larger demo image for AI Job Description Translator">
+            <img
+              class="project-demo-image"
+              src="images/job-translator-demo.svg"
+              alt="Mock demo of the AI Job Description Translator showing plain-language requirements and action plan"
+            />
+          </button>
+          <div class="project-visual-note">
+            <p class="project-visual-label">What this visual shows</p>
+            <p>The mockup explains how a dense posting becomes something usable: plain-language meaning, a student action plan, and clear signals about what proof to show in a resume or cover letter.</p>
+          </div>
+          <h3>Problem</h3>
+          <p><strong>What issue are you solving?</strong> Students misread job descriptions and miss key required skills before applying.</p>
+
+          <h3>Solution</h3>
+          <p>
+            <strong>What you built:</strong> A translator that extracts job requirements, simplifies language, and creates a practical preparation checklist.
+          </p>
+          <p><strong>My role:</strong> created extraction logic and student-focused output format.</p>
+          <p><strong>Tools:</strong> React, Gemini API, classification prompts, structured JSON output.</p>
+
+          <h3>How it works</h3>
+          <ul class="list-check">
+            <li><strong>Input:</strong> Full job description text + student profile.</li>
+            <li><strong>AI:</strong> Extracts required/preferred skills and rewrites into plain language.</li>
+            <li><strong>Output:</strong> Skill checklist, gap summary, and 2-week prep plan.</li>
+          </ul>
+
+          <h3>Example Output</h3>
+          <div class="output-box">
+            <p><strong>Required skills:</strong> SQL, dashboarding, stakeholder communication.</p>
+            <p><strong>Plain-language summary:</strong> “You need to analyze data, present findings clearly, and work with non-technical teams.”</p>
+            <p><strong>Action plan:</strong> 6 concrete tasks over 14 days (portfolio project, SQL practice, mock presentation).</p>
+          </div>
+
+          <h3>AI Workflow</h3>
+          <h4>Prompts</h4>
+          <div class="prompt-box">
+            “Read this job posting. Extract required skills, preferred skills, and responsibilities. Return in JSON with
+            concise language suitable for first-year students.”
+          </div>
+          <h4>Iteration</h4>
+          <div class="prompt-box">
+            “Now generate a 2-week preparation plan for this student profile: business major, beginner in Excel, strong
+            communication, limited internship experience.”
+          </div>
+          <h4>Improvements</h4>
+          <ul class="list-check">
+            <li>Compared readability for first-year vs senior student profiles.</li>
+            <li>Separated required vs preferred skills to reduce confusion.</li>
+            <li>Added timeline-based next steps for better execution.</li>
+          </ul>
+
+          <h3>Reflection</h3>
+          <p><strong>What I learned / what I’d improve:</strong> Structure matters more than long explanations. Next, I would add job-fit scoring and role comparison between multiple postings.</p>
+        </div>
+      </section>
+
+      <section class="section" id="cover-letter-feedback">
+        <div class="container card">
+          <p class="mini-label">Use this section to review the problem, workflow, example output, and reflection.</p>
+          <h2>Project Title: AI Cover Letter Feedback</h2>
+          <p><strong>One-line description:</strong> Improves cover letters using role-specific context, clearer evidence, and student-friendly revision guidance.</p>
+          <button class="screenshot screenshot-trigger" type="button" data-lightbox-src="images/cover-letter-feedback-demo.svg" data-lightbox-alt="Mock demo of the AI Cover Letter Feedback tool showing improved cover letter output" aria-label="Open larger demo image for AI Cover Letter Feedback">
+            <img
+              class="project-demo-image"
+              src="images/cover-letter-feedback-demo.svg"
+              alt="Mock demo of the AI Cover Letter Feedback tool showing improved cover letter output"
+            />
+          </button>
+          <div class="project-visual-note">
+            <p class="project-visual-label">What this visual shows</p>
+            <p>The mockup frames the tool like a real review experience: weak lines are flagged, the improved paragraph is grounded in evidence, and the student gets a clear next revision step.</p>
+          </div>
+          <h3>Problem</h3>
+          <p><strong>What issue are you solving?</strong> Students write generic cover letters that fail to match the role and do not clearly use evidence from their resume.</p>
+
+          <h3>Solution</h3>
+          <p>
+            <strong>What you built:</strong> A cover letter feedback tool that grounds revisions in resume facts and aligns language to job requirements.
+          </p>
+          <p><strong>My role:</strong> built workflow, prompt routing, and quality scoring checks.</p>
+          <p><strong>Tools:</strong> React, OpenAI API, response scoring rubric, deployed prototype.</p>
+
+          <h3>How it works</h3>
+          <ul class="list-check">
+            <li><strong>Input:</strong> Job description + student resume + draft cover letter.</li>
+            <li><strong>AI:</strong> Scores relevance/clarity and rewrites with evidence-based alignment.</li>
+            <li><strong>Output:</strong> Improved cover letter draft, confidence score, and revision notes.</li>
+          </ul>
+
+          <h3>Example Output</h3>
+          <div class="output-box">
+            <p><strong>Before:</strong> “I am excited about this role and believe I am a hard worker.”</p>
+            <p><strong>After:</strong> “I’m excited to apply my project coordination experience from leading a 5-person team to deliver a campus analytics project ahead of schedule, and I would bring that same organized approach to this internship.”</p>
+            <p><strong>Result:</strong> Relevance score improved from 6.0/10 to 8.4/10 in internal evaluation.</p>
+          </div>
+
+          <h3>AI Workflow</h3>
+          <h4>Prompts</h4>
+          <div class="prompt-box">
+            “Write a focused cover letter for this internship using the student resume and job description. Keep it under
+            220 words and reference only evidence from the resume.”
+          </div>
+          <h4>Iteration</h4>
+          <div class="prompt-box">
+            “Evaluate this draft cover letter from 1-10 for relevance, clarity, and specificity. Then rewrite with stronger
+            alignment to the job requirements.”
+          </div>
+          <h4>Improvements</h4>
+          <ul class="list-check">
+            <li>Tested technical and non-technical roles for output consistency.</li>
+            <li>Added grounding rules to block invented achievements.</li>
+            <li>Added concise mode for strict character-limit forms.</li>
+          </ul>
+
+          <h3>Reflection</h3>
+          <p><strong>What I learned / what I’d improve:</strong> Grounding constraints are essential for trust. Next, I would add plagiarism checks and recruiter-style feedback simulation.</p>
+        </div>
+      </section>
+
+      <section class="section" id="student-loan-site">
+        <div class="container card">
+          <p class="mini-label">A separate student-support website focused on debt understanding and financial guidance.</p>
+          <h2>Other ways I help students: Building a website to help students with student loan</h2>
+          <p><strong>One-line description:</strong> Interactive student loan website that estimates repayment time through a simple, focused estimator.</p>
+          <a class="screenshot screenshot-trigger" href="student-loans.html" aria-label="Open the student loan estimator page">
+            <img class="project-demo-image" src="images/student-loan-estimator-demo.svg" alt="Preview of the student loan estimator page with repayment estimate cards" />
+          </a>
+          <h3>Problem</h3>
+          <p><strong>What issue are you solving?</strong> Student debt often feels abstract. Many students do not understand how repayment timelines stretch as balances increase.</p>
+
+          <h3>Solution</h3>
+          <p><strong>What you built:</strong> A student loan estimator that turns debt ranges into a personal repayment estimate and shows how payoff windows expand as balances grow.</p>
+          <p><strong>My role:</strong> built the interactive estimator experience, explained the dataset clearly, and simplified the product around one student-friendly task.</p>
+          <p><strong>Live website:</strong> <a class="project-link" href="student-loans.html">Visit the student loan website</a></p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container card">
+          <p class="kicker">Links</p>
+          <h2>Connect</h2>
+          <div class="external-links" aria-label="Portfolio links">
+            <a class="ext-link" href="https://github.com/gdb22" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a
+              class="ext-link"
+              href="https://www.linkedin.com/in/guna-banka-785179269/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >LinkedIn</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">© <span data-year></span> Guna Banka — Building practical tools for students.</div>
+    </footer>
+
+    <div class="lightbox" id="lightbox" hidden>
+      <div class="lightbox-backdrop" data-lightbox-close></div>
+      <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Expanded project demo image">
+        <button class="lightbox-close" type="button" id="lightboxClose" aria-label="Close image preview">×</button>
+        <img class="lightbox-image" id="lightboxImage" alt="" />
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

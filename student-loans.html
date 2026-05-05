@@ -81,29 +81,36 @@
               <label for="loanBalance">Student loan balance</label>
               <input id="loanBalance" class="demo-input" type="number" min="0" max="500000" step="500" value="39550" />
               <input id="loanRange" class="loan-range" type="range" min="0" max="500000" step="500" value="39550" />
+              <p class="loan-balance-display" id="loanBalanceDisplay">$39,550 selected</p>
               <div class="btn-row">
-                <button class="btn btn-primary" id="calculateLoan" type="button">Estimate repayment</button>
+                <button class="btn btn-primary" id="calculateLoan" type="button">Estimate payoff</button>
                 <button class="btn btn-secondary" id="resetLoan" type="button">Reset</button>
               </div>
-              <p class="status-text" id="loanStatus" aria-live="polite">Ready to estimate a repayment window.</p>
+              <p class="status-text" id="loanStatus" aria-live="polite">Move the slider or enter a balance, then estimate the payoff details.</p>
             </div>
 
             <div class="loan-results-grid">
               <article class="card loan-result-card">
-                <p class="mini-label">Estimated repayment time</p>
-                <h3 id="loanYears">~20 years</h3>
-                <p id="loanWindowText">Long-term repayment window</p>
+                <p class="mini-label">Estimated monthly payment</p>
+                <h3 id="loanMonthlyPayment">$295/mo</h3>
+                <p id="loanPaymentDetail">Based on a fixed benchmark APR and a 15-year payoff window.</p>
               </article>
               <article class="card loan-result-card">
-                <p class="mini-label">Debt range matched</p>
-                <h3 id="loanRangeMatch">$20,000 to $39,999</h3>
-                <p>Based on the repayment-period ranges used in this project.</p>
+                <p class="mini-label">Estimated payoff timeline</p>
+                <h3 id="loanYears">15 years</h3>
+                <p id="loanWindowText">Estimated payoff date: May 2041</p>
               </article>
               <article class="card loan-result-card">
-                <p class="mini-label">Compared with 2025 average debt</p>
-                <h3 id="loanAverageCompare">Right at the average</h3>
-                <p id="loanMonthlyPace">Principal-only pace: about $165/mo over 20 years.</p>
+                <p class="mini-label">Total repaid and interest</p>
+                <h3 id="loanTotalPaid">$53,100 total</h3>
+                <p id="loanCostBreakdown">Includes about $13,550 in estimated interest over the full term.</p>
               </article>
+            </div>
+            <div class="loan-estimate-note">
+              <p class="mini-label">How this estimate was calculated</p>
+              <p class="loan-estimate-highlight" id="loanAverageCompare">Right at the 2025 average balance</p>
+              <p id="loanMonthlyPace">Assumes a 6.53% fixed APR benchmark. At that same rate and term, the 2025 average balance would cost about $337/mo.</p>
+              <p id="loanRangeMatch">Current estimate uses the $20,000 to $39,999 balance band and a longer repayment window than the standard 10-year plan.</p>
             </div>
           </div>
         </div>

@@ -924,73 +924,164 @@ if (lightbox && lightboxImage && lightboxTriggers.length) {
 // Student loan estimator
 const loanBalanceInput = document.querySelector('#loanBalance');
 const loanRangeInput = document.querySelector('#loanRange');
+const loanBalanceDisplay = document.querySelector('#loanBalanceDisplay');
 const calculateLoanButton = document.querySelector('#calculateLoan');
 const resetLoanButton = document.querySelector('#resetLoan');
+const loanMonthlyPayment = document.querySelector('#loanMonthlyPayment');
+const loanPaymentDetail = document.querySelector('#loanPaymentDetail');
 const loanYears = document.querySelector('#loanYears');
 const loanRangeMatch = document.querySelector('#loanRangeMatch');
 const loanAverageCompare = document.querySelector('#loanAverageCompare');
 const loanMonthlyPace = document.querySelector('#loanMonthlyPace');
+const loanTotalPaid = document.querySelector('#loanTotalPaid');
+const loanCostBreakdown = document.querySelector('#loanCostBreakdown');
 const loanWindowText = document.querySelector('#loanWindowText');
 const loanStatus = document.querySelector('#loanStatus');
 
 if (
   loanBalanceInput &&
   loanRangeInput &&
+  loanBalanceDisplay &&
   calculateLoanButton &&
   resetLoanButton &&
+  loanMonthlyPayment &&
+  loanPaymentDetail &&
   loanYears &&
   loanRangeMatch &&
   loanAverageCompare &&
   loanMonthlyPace &&
+  loanTotalPaid &&
+  loanCostBreakdown &&
   loanWindowText
 ) {
   const average2025Balance = 39550;
+  const benchmarkApr = 6.53;
   const ranges = [
-    { min: 0, max: 9999, years: 5, label: '$0 to $9,999', window: 'Short repayment window' },
-    { min: 10000, max: 19999, years: 10, label: '$10,000 to $19,999', window: 'Moderate repayment window' },
-    { min: 20000, max: 39999, years: 20, label: '$20,000 to $39,999', window: 'Long-term repayment window' },
-    { min: 40000, max: 59999, years: 25, label: '$40,000 to $59,999', window: 'Extended repayment window' },
-    { min: 60000, max: 500000, years: 30, label: '$60,000+', window: 'Very long repayment window' },
+    { min: 0, max: 9999, years: 7, label: '$0 to $9,999', window: 'Smaller balances can often be cleared on a shorter plan.' },
+    { min: 10000, max: 19999, years: 10, label: '$10,000 to $19,999', window: 'This estimate uses a standard-style 10-year repayment window.' },
+    { min: 20000, max: 39999, years: 15, label: '$20,000 to $39,999', window: 'This estimate uses a longer plan to keep the monthly payment more manageable.' },
+    { min: 40000, max: 59999, years: 20, label: '$40,000 to $59,999', window: 'Balances in this range often require a longer payoff window to reduce monthly strain.' },
+    { min: 60000, max: 500000, years: 25, label: '$60,000+', window: 'Larger balances typically need an extended repayment horizon to stay affordable.' },
   ];
 
+  const formatCurrency = (value) =>
+    new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: value >= 100 ? 0 : 2,
+    }).format(value);
+
+  const formatMonthYear = (date) =>
+    new Intl.DateTimeFormat('en-US', {
+      month: 'long',
+      year: 'numeric',
+    }).format(date);
+
+  const describeTerm = (months) => {
+    const years = Math.floor(months / 12);
+    const remainingMonths = months % 12;
+
+    if (!remainingMonths) {
+      return `${years} year${years === 1 ? '' : 's'}`;
+    }
+
+    return `${years} year${years === 1 ? '' : 's'} ${remainingMonths} month${remainingMonths === 1 ? '' : 's'}`;
+  };
+
+  const updateRangeProgress = (value) => {
+    const min = Number(loanRangeInput.min) || 0;
+    const max = Number(loanRangeInput.max) || 1;
+    const progress = ((value - min) / (max - min)) * 100;
+    loanRangeInput.style.background = `linear-gradient(90deg, var(--brand) 0%, var(--brand) ${progress}%, rgba(148, 163, 184, 0.28) ${progress}%, rgba(148, 163, 184, 0.28) 100%)`;
+  };
+
+  const calculateAmortizedPayment = (principal, annualRate, months) => {
+    if (principal <= 0 || months <= 0) {
+      return 0;
+    }
+
+    const monthlyRate = annualRate / 100 / 12;
+
+    if (!monthlyRate) {
+      return principal / months;
+    }
+
+    return principal * (monthlyRate / (1 - (1 + monthlyRate) ** -months));
+  };
+
+  const getMatchedRange = (balance) => ranges.find((range) => balance >= range.min && balance <= range.max) || ranges[ranges.length - 1];
+
   const syncLoanInputs = (value) => {
-    loanBalanceInput.value = value;
-    loanRangeInput.value = value;
+    const numericValue = Math.min(Number(loanRangeInput.max), Math.max(Number(loanRangeInput.min), Number(value) || 0));
+    loanBalanceInput.value = numericValue;
+    loanRangeInput.value = numericValue;
+    loanBalanceDisplay.textContent = `${formatCurrency(numericValue)} selected`;
+    updateRangeProgress(numericValue);
+  };
+
+  const updateLoanPreview = () => {
+    const balance = Math.max(0, Number(loanBalanceInput.value) || 0);
+    syncLoanInputs(balance);
+    const matchedRange = getMatchedRange(balance);
+
+    if (loanStatus) {
+      loanStatus.textContent = `Selected ${formatCurrency(balance)}. Click Estimate payoff to calculate monthly payment, payoff date, and interest.`;
+    }
+
+    loanRangeMatch.textContent = `Preview: ${matchedRange.label}`;
   };
 
   const estimateLoan = () => {
     const balance = Math.max(0, Number(loanBalanceInput.value) || 0);
     syncLoanInputs(balance);
 
-    const matchedRange = ranges.find((range) => balance >= range.min && balance <= range.max) || ranges[ranges.length - 1];
-    const monthlyPace = matchedRange.years > 0 ? Math.round(balance / (matchedRange.years * 12)) : 0;
+    const matchedRange = getMatchedRange(balance);
+    const months = matchedRange.years * 12;
+    const monthlyPayment = calculateAmortizedPayment(balance, benchmarkApr, months);
+    const totalPaid = monthlyPayment * months;
+    const interestPaid = Math.max(0, totalPaid - balance);
+    const payoffDate = new Date();
+    payoffDate.setMonth(payoffDate.getMonth() + months);
+
+    const averageMonthlyPayment = calculateAmortizedPayment(average2025Balance, benchmarkApr, months);
+    const differenceFromAverage = balance - average2025Balance;
+    const differencePercent = average2025Balance ? Math.abs(differenceFromAverage / average2025Balance) * 100 : 0;
     const delta = balance - average2025Balance;
 
-    loanYears.textContent = `~${matchedRange.years} years`;
-    loanRangeMatch.textContent = matchedRange.label;
-    loanWindowText.textContent = matchedRange.window;
-    loanMonthlyPace.textContent = `Principal-only pace: about $${monthlyPace}/mo over ${matchedRange.years} years.`;
+    loanMonthlyPayment.textContent = `${formatCurrency(monthlyPayment)}/mo`;
+    loanPaymentDetail.textContent = `Assumes a ${benchmarkApr.toFixed(2)}% fixed benchmark APR over ${describeTerm(months)}.`;
+    loanYears.textContent = describeTerm(months);
+    loanWindowText.textContent = `Estimated payoff date: ${formatMonthYear(payoffDate)}. ${matchedRange.window}`;
+    loanTotalPaid.textContent = `${formatCurrency(totalPaid)} total`;
+    loanCostBreakdown.textContent = `That includes about ${formatCurrency(interestPaid)} in estimated interest on top of the original ${formatCurrency(balance)} balance.`;
+    loanRangeMatch.textContent = `Current estimate uses the ${matchedRange.label} balance band and a ${matchedRange.years}-year repayment window.`;
 
     if (Math.abs(delta) < 1500) {
-      loanAverageCompare.textContent = 'Right at the average';
+      loanAverageCompare.textContent = 'Right at the 2025 average balance';
     } else if (delta > 0) {
-      loanAverageCompare.textContent = 'Above the 2025 average';
+      loanAverageCompare.textContent = `${differencePercent.toFixed(0)}% above the 2025 average balance`;
     } else {
-      loanAverageCompare.textContent = 'Below the 2025 average';
+      loanAverageCompare.textContent = `${differencePercent.toFixed(0)}% below the 2025 average balance`;
     }
 
+    loanMonthlyPace.textContent = `At the same ${benchmarkApr.toFixed(2)}% benchmark APR and ${matchedRange.years}-year term, the 2025 average balance would cost about ${formatCurrency(averageMonthlyPayment)}/mo.`;
+
     if (loanStatus) {
-      loanStatus.textContent = `Estimated repayment window updated for $${balance.toLocaleString()}.`;
+      loanStatus.textContent = `Estimated a ${describeTerm(months)} payoff for ${formatCurrency(balance)} with a monthly payment of ${formatCurrency(monthlyPayment)}.`;
     }
   };
 
-  loanBalanceInput.addEventListener('input', () => syncLoanInputs(loanBalanceInput.value));
-  loanRangeInput.addEventListener('input', () => syncLoanInputs(loanRangeInput.value));
+  loanBalanceInput.addEventListener('input', updateLoanPreview);
+  loanRangeInput.addEventListener('input', () => {
+    syncLoanInputs(loanRangeInput.value);
+    updateLoanPreview();
+  });
   calculateLoanButton.addEventListener('click', estimateLoan);
   resetLoanButton.addEventListener('click', () => {
     syncLoanInputs(39550);
     estimateLoan();
   });
 
+  updateLoanPreview();
   estimateLoan();
 }

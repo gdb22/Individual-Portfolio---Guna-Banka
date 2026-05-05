@@ -2,7 +2,10 @@
 
 ## Name - Guna Banka
 
-## Deployment Link - https://gdb22.github.io/Individual-Portfolio---Guna-Banka/
+## Deployment Link 
+GitHub: https://gdb22.github.io/Individual-Portfolio---Guna-Banka/
+Vercel (Recommended): https://individual-portfolio-guna-banka.vercel.app/
+
 ## LinkedIn Profile - https://www.linkedin.com/in/guna-banka-785179269/
 
 ## AI Feedback Setup

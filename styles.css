@@ -1137,6 +1137,141 @@ body[data-page="projects"] .section-in-view .screenshot {
   color: var(--muted);
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.chat-card {
+  overflow: hidden;
+}
+
+.chat-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.chat-intro {
+  margin: 0 0 16px;
+}
+
+.chat-suggestions {
+  display: grid;
+  gap: 10px;
+}
+
+.chat-suggestion,
+.chat-followup {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.98);
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  padding: 12px 14px;
+  text-align: left;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.chat-suggestion:hover,
+.chat-followup:hover {
+  transform: translateY(-1px);
+  border-color: var(--border-strong);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
+}
+
+.chat-shell {
+  display: grid;
+  gap: 12px;
+}
+
+.chat-messages {
+  display: grid;
+  gap: 12px;
+  min-height: 340px;
+  max-height: 460px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.chat-message {
+  max-width: 90%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(248, 250, 252, 0.96);
+}
+
+.chat-message p {
+  margin: 0;
+}
+
+.chat-message p + p {
+  margin-top: 6px;
+}
+
+.chat-message-user {
+  justify-self: end;
+  background: rgba(31, 75, 110, 0.08);
+  border-color: rgba(31, 75, 110, 0.18);
+}
+
+.chat-role,
+.chat-followups-label {
+  color: var(--brand) !important;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.chat-form {
+  display: grid;
+  gap: 10px;
+}
+
+.chat-input {
+  min-height: 88px;
+  margin-bottom: 0;
+}
+
+.chat-form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.chat-form-row .status-text {
+  flex: 1;
+}
+
+.chat-followups {
+  display: grid;
+  gap: 8px;
+}
+
+.chat-followups-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chat-followup {
+  border-radius: 999px;
+  padding: 8px 12px;
+}
+
 .output-box p {
   margin: 0 0 8px;
 }

@@ -866,6 +866,151 @@ if (demoTool && demoInput && runDemoButton && demoOutput) {
   }
 }
 
+// Portfolio chatbot (homepage)
+const chatForm = document.querySelector('#chatForm');
+const chatInput = document.querySelector('#chatInput');
+const chatMessages = document.querySelector('#chatMessages');
+const chatStatus = document.querySelector('#chatStatus');
+const sendChatButton = document.querySelector('#sendChat');
+const chatSuggestionButtons = document.querySelectorAll('[data-chat-suggestion]');
+
+if (chatForm && chatInput && chatMessages && chatStatus && sendChatButton) {
+  const chatHistory = [];
+
+  const escapeChatHtml = (value) =>
+    String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+
+  const renderChatMessage = (role, content) => {
+    const article = document.createElement('article');
+    article.className = `chat-message ${role === 'assistant' ? 'chat-message-assistant' : 'chat-message-user'}`;
+    article.innerHTML = `
+      <p class="chat-role">${role === 'assistant' ? 'Portfolio Assistant' : 'You'}</p>
+      <p>${escapeChatHtml(content)}</p>
+    `;
+    chatMessages.append(article);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  };
+
+  const renderSuggestedQuestions = (questions) => {
+    if (!Array.isArray(questions) || !questions.length) {
+      return;
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'chat-followups';
+    wrapper.innerHTML = `
+      <p class="chat-followups-label">Suggested follow-up questions</p>
+      <div class="chat-followups-list">
+        ${questions
+          .map(
+            (question) =>
+              `<button class="chat-followup" type="button" data-chat-followup="${escapeChatHtml(question)}">${escapeChatHtml(question)}</button>`,
+          )
+          .join('')}
+      </div>
+    `;
+
+    chatMessages.append(wrapper);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    wrapper.querySelectorAll('[data-chat-followup]').forEach((button) => {
+      button.addEventListener('click', () => {
+        chatInput.value = button.getAttribute('data-chat-followup') || '';
+        chatInput.focus();
+      });
+    });
+  };
+
+  const requestChatReply = async (message) => {
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 15000);
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message,
+          messages: chatHistory.slice(-6),
+        }),
+        signal: controller.signal,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Chat API returned ${response.status}`);
+      }
+
+      const payload = await response.json();
+
+      if (!payload || typeof payload.answer !== 'string') {
+        throw new Error('Chat API returned an invalid payload.');
+      }
+
+      return payload;
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
+  };
+
+  const setChatLoading = (isLoading) => {
+    sendChatButton.classList.toggle('is-running', isLoading);
+    sendChatButton.disabled = isLoading;
+    chatInput.disabled = isLoading;
+  };
+
+  const submitChat = async (message) => {
+    const trimmedMessage = message.trim();
+
+    if (!trimmedMessage) {
+      chatStatus.textContent = 'Type a question before sending.';
+      return;
+    }
+
+    renderChatMessage('user', trimmedMessage);
+    chatHistory.push({ role: 'user', content: trimmedMessage });
+    chatInput.value = '';
+    chatStatus.textContent = 'Thinking...';
+    setChatLoading(true);
+
+    try {
+      const payload = await requestChatReply(trimmedMessage);
+      renderChatMessage('assistant', payload.answer);
+      chatHistory.push({ role: 'assistant', content: payload.answer });
+      renderSuggestedQuestions(payload.suggestedQuestions);
+      chatStatus.textContent = 'Reply generated.';
+    } catch (error) {
+      const fallbackAnswer = 'The live portfolio chatbot is unavailable right now. Once the Vercel API route is active, I can answer questions about Guna’s projects, workflow, and portfolio direction.';
+      renderChatMessage('assistant', fallbackAnswer);
+      chatHistory.push({ role: 'assistant', content: fallbackAnswer });
+      chatStatus.textContent = 'Chat API unavailable. Showing fallback assistant message.';
+      console.warn('Portfolio chat fallback:', error);
+    } finally {
+      setChatLoading(false);
+      chatInput.focus();
+    }
+  };
+
+  chatForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    submitChat(chatInput.value);
+  });
+
+  chatSuggestionButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const prompt = button.getAttribute('data-chat-suggestion') || '';
+      chatInput.value = prompt;
+      chatInput.focus();
+    });
+  });
+}
+
 // Back to top
 const backToTopButton = document.querySelector('#backToTop');
 if (backToTopButton) {

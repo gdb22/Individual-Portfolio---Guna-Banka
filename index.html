@@ -309,6 +309,61 @@
         </div>
       </section>
 
+      <section class="section" id="assistant">
+        <div class="container card chat-card">
+          <div class="section-head-inline">
+            <div>
+              <p class="kicker">Portfolio Assistant</p>
+              <h2 class="section-title">Ask the portfolio chatbot a question</h2>
+            </div>
+            <p class="section-caption">Ask about projects, workflow, goals, or what recruiters should notice.</p>
+          </div>
+          <div class="chat-layout">
+            <div>
+              <p class="chat-intro">
+                This assistant is trained to answer questions about Guna Banka's portfolio, projects, workflow, and
+                product thinking.
+              </p>
+              <div class="chat-suggestions" aria-label="Suggested chatbot questions">
+                <button class="chat-suggestion" type="button" data-chat-suggestion="What problem does the resume feedback project solve?">
+                  Ask about the resume tool
+                </button>
+                <button class="chat-suggestion" type="button" data-chat-suggestion="How does this portfolio show recruiter-ready product thinking?">
+                  Ask what recruiters should notice
+                </button>
+                <button class="chat-suggestion" type="button" data-chat-suggestion="What makes Guna's AI workflow practical instead of generic?">
+                  Ask about the AI workflow
+                </button>
+              </div>
+            </div>
+            <div class="chat-shell">
+              <div class="chat-messages output-box" id="chatMessages" aria-live="polite">
+                <article class="chat-message chat-message-assistant">
+                  <p class="chat-role">Portfolio Assistant</p>
+                  <p>
+                    Hi — I can answer questions about Guna's projects, workflow, portfolio goals, and how this work is
+                    positioned for students and recruiters.
+                  </p>
+                </article>
+              </div>
+              <form class="chat-form" id="chatForm">
+                <label class="sr-only" for="chatInput">Ask the portfolio assistant a question</label>
+                <textarea
+                  id="chatInput"
+                  class="demo-input chat-input"
+                  rows="3"
+                  placeholder="Ask something like: Which project is most relevant for recruiters?"
+                ></textarea>
+                <div class="chat-form-row">
+                  <p class="status-text" id="chatStatus" aria-live="polite">Ready for questions.</p>
+                  <button class="btn btn-primary" id="sendChat" type="submit">Send</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section">
         <div class="container card">
           <p class="kicker">Links</p>

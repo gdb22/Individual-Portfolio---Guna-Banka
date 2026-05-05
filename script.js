@@ -342,6 +342,14 @@ const demoOutput = document.querySelector('#demoOutput');
 const demoStatus = document.querySelector('#demoStatus');
 
 if (demoTool && demoInput && runDemoButton && demoOutput) {
+  const escapeHtml = (value) =>
+    value
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+
   const cleanSnippet = (text, maxLength = 140) => {
     const normalized = text.replace(/\s+/g, ' ').trim();
     if (normalized.length <= maxLength) {
@@ -351,121 +359,436 @@ if (demoTool && demoInput && runDemoButton && demoOutput) {
     return `${normalized.slice(0, maxLength).trim()}…`;
   };
 
+  const listWords = (items) => {
+    if (!items.length) {
+      return '';
+    }
+
+    if (items.length === 1) {
+      return items[0];
+    }
+
+    if (items.length === 2) {
+      return `${items[0]} and ${items[1]}`;
+    }
+
+    return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
+  };
+
+  const splitSentences = (text) =>
+    text
+      .split(/(?<=[.!?])\s+/)
+      .map((sentence) => sentence.trim())
+      .filter(Boolean);
+
+  const extractTopKeywords = (text, limit = 5) => {
+    const stopWords = new Set([
+      'about',
+      'after',
+      'again',
+      'against',
+      'along',
+      'also',
+      'because',
+      'being',
+      'build',
+      'built',
+      'cover',
+      'could',
+      'draft',
+      'experience',
+      'have',
+      'into',
+      'internship',
+      'letter',
+      'more',
+      'most',
+      'role',
+      'resume',
+      'skills',
+      'strong',
+      'student',
+      'team',
+      'that',
+      'this',
+      'with',
+      'work',
+      'worked',
+      'would',
+      'your',
+    ]);
+
+    const counts = new Map();
+    const words = text.toLowerCase().match(/[a-z][a-z-]{2,}/g) || [];
+
+    words.forEach((word) => {
+      if (stopWords.has(word)) {
+        return;
+      }
+
+      counts.set(word, (counts.get(word) || 0) + 1);
+    });
+
+    return Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .slice(0, limit)
+      .map(([word]) => word);
+  };
+
   const detectMetrics = (text) => /\d|%|percent|users?|projects?|months?|years?|gpa|score|increase|reduced|improved/i.test(text);
   const detectActionVerb = (text) => /\b(built|created|led|organized|designed|developed|improved|launched|managed|analyzed|supported|collaborated)\b/i.test(text);
   const detectOutcome = (text) => /\b(result|impact|improved|increased|reduced|helped|delivered|achieved|grew|saved)\b/i.test(text);
+  const detectContext = (text) => /\b(using|with|for|through|across|by|serving|supporting|leading|managing)\b/i.test(text);
 
-  const renderDemoCard = ({ title, summary, explanation, rewriteTitle, rewrite, reasons, nextSteps }) => {
+  const strengthenResumeOpening = (text) => {
+    const replacements = [
+      { pattern: /^i\s+/i, replacement: '' },
+      { pattern: /^helped\b/i, replacement: 'Supported' },
+      { pattern: /^worked on\b/i, replacement: 'Contributed to' },
+      { pattern: /^responsible for\b/i, replacement: 'Managed' },
+      { pattern: /^assisted with\b/i, replacement: 'Supported' },
+      { pattern: /^participated in\b/i, replacement: 'Contributed to' },
+      { pattern: /^did\b/i, replacement: 'Completed' },
+    ];
+
+    let updated = text.trim();
+
+    replacements.forEach(({ pattern, replacement }) => {
+      if (pattern.test(updated)) {
+        updated = updated.replace(pattern, replacement);
+      }
+    });
+
+    return updated.charAt(0).toUpperCase() + updated.slice(1);
+  };
+
+  const renderDemoCard = ({
+    title,
+    summary,
+    explanation,
+    rewriteTitle,
+    rewrite,
+    firstListTitle,
+    firstListItems,
+    secondListTitle,
+    secondListItems,
+  }) => {
     demoOutput.innerHTML = `
       <div class="demo-result">
-        <p class="demo-result-label">${title}</p>
-        <p class="demo-result-summary">${summary}</p>
+        <p class="demo-result-label">${escapeHtml(title)}</p>
+        <p class="demo-result-summary">${escapeHtml(summary)}</p>
         <div class="demo-result-section">
           <h4>Plain-language explanation</h4>
-          <p>${explanation}</p>
+          <p>${escapeHtml(explanation)}</p>
         </div>
         <div class="demo-result-section">
-          <h4>${rewriteTitle}</h4>
-          <div class="demo-result-rewrite">${rewrite}</div>
+          <h4>${escapeHtml(rewriteTitle)}</h4>
+          <div class="demo-result-rewrite">${escapeHtml(rewrite)}</div>
         </div>
         <div class="demo-result-section">
-          <h4>Why this helps a student</h4>
+          <h4>${escapeHtml(firstListTitle)}</h4>
           <ul class="list-check demo-result-list">
-            ${reasons.map((reason) => `<li>${reason}</li>`).join('')}
+            ${firstListItems.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
           </ul>
         </div>
         <div class="demo-result-section">
-          <h4>Next step</h4>
+          <h4>${escapeHtml(secondListTitle)}</h4>
           <ul class="list-check demo-result-list">
-            ${nextSteps.map((step) => `<li>${step}</li>`).join('')}
+            ${secondListItems.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
           </ul>
         </div>
       </div>
     `;
   };
 
+  const normalizeFeedbackPayload = (payload, tool) => {
+    const fallbackTitles = {
+      resume: 'Resume Feedback · Live review',
+      job: 'Job Translator · Live review',
+      'cover-letter': 'Cover Letter Feedback · Live review',
+    };
+
+    return {
+      title: payload.title || fallbackTitles[tool] || 'AI Feedback',
+      summary: payload.summary || 'Feedback generated from your input.',
+      explanation: payload.explanation || 'The system reviewed your input and returned structured guidance.',
+      rewriteTitle: payload.rewriteTitle || 'Suggested revision',
+      rewrite: payload.rewrite || cleanSnippet(payload.input || '', 220),
+      firstListTitle: payload.firstListTitle || 'What is working',
+      firstListItems: Array.isArray(payload.firstListItems) && payload.firstListItems.length
+        ? payload.firstListItems
+        : ['The response identified at least one useful strength to keep.'],
+      secondListTitle: payload.secondListTitle || 'What to improve next',
+      secondListItems: Array.isArray(payload.secondListItems) && payload.secondListItems.length
+        ? payload.secondListItems
+        : ['The response identified at least one practical next improvement.'],
+    };
+  };
+
+  const requestLiveFeedback = async (tool, inputText) => {
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 12000);
+
+    try {
+      const response = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ tool, input: inputText }),
+        signal: controller.signal,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Feedback API returned ${response.status}`);
+      }
+
+      const payload = await response.json();
+
+      if (!payload || typeof payload !== 'object') {
+        throw new Error('Feedback API returned an invalid payload.');
+      }
+
+      return payload;
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
+  };
+
   const buildResumeDemo = (inputText) => {
+    const normalized = cleanSnippet(inputText, 240);
     const hasMetric = detectMetrics(inputText);
     const hasVerb = detectActionVerb(inputText);
     const hasOutcome = detectOutcome(inputText);
-    const score = 5.8 + (hasMetric ? 1.2 : 0) + (hasVerb ? 0.8 : 0) + (hasOutcome ? 0.7 : 0) + (inputText.length > 60 ? 0.5 : 0);
-    const improvedBullet = `${hasVerb ? cleanSnippet(inputText, 90) : `Built ${cleanSnippet(inputText.toLowerCase(), 72)}`}${hasMetric ? '' : ', improving clarity and showing stronger evidence of impact'}.`;
+    const hasContext = detectContext(inputText);
+    const hasWeakOpening = /^(helped|worked on|responsible for|assisted with|participated in)\b/i.test(inputText.trim());
+    const isTooLong = cleanSnippet(inputText, 999).length > 145;
+    const score = 4.9 + (hasVerb ? 1 : 0) + (hasMetric ? 1.2 : 0) + (hasOutcome ? 0.9 : 0) + (hasContext ? 0.7 : 0) - (hasWeakOpening ? 0.5 : 0);
+    const rewrittenCore = strengthenResumeOpening(normalized).replace(/[.\s]+$/, '');
+    const rewriteNotes = [];
+
+    if (!hasMetric) {
+      rewriteNotes.push('add a measurable result if available');
+    }
+
+    if (!hasOutcome) {
+      rewriteNotes.push('end with the impact or result');
+    }
+
+    const improvedBullet = `${rewrittenCore}${rewriteNotes.length ? ` [${rewriteNotes.join('; ')}]` : ''}.`;
+    const workingItems = [];
+    const improvementItems = [];
+
+    if (hasVerb) {
+      workingItems.push('The bullet already includes action, which makes your role easier to understand quickly.');
+    }
+
+    if (hasContext) {
+      workingItems.push('It gives some context about the work, so the reader is not left guessing what the task involved.');
+    }
+
+    if (hasMetric) {
+      workingItems.push('There is measurable proof in the line, which makes the achievement more believable.');
+    }
+
+    if (!workingItems.length) {
+      workingItems.push('The bullet points to a real responsibility or experience, so there is something useful to build on.');
+    }
+
+    if (!hasVerb) {
+      improvementItems.push('Start with a stronger action verb so the bullet sounds owned rather than passive.');
+    }
+
+    if (!hasMetric) {
+      improvementItems.push('Add one number, time frame, or scale marker so the reader can judge scope or impact.');
+    }
+
+    if (!hasOutcome) {
+      improvementItems.push('Show what changed because of your work, not just what you were assigned to do.');
+    }
+
+    if (isTooLong) {
+      improvementItems.push('Trim filler words so the strongest action and result are visible in the first scan.');
+    }
+
+    if (!improvementItems.length) {
+      improvementItems.push('Tailor the wording to the internship by matching one or two keywords from the target role.');
+    }
 
     renderDemoCard({
       title: `Resume Feedback · ${Math.min(9.4, score).toFixed(1)}/10 readiness score`,
-      summary: 'The demo is checking whether your bullet shows action, context, and proof instead of sounding vague.',
-      explanation: `Right now, your bullet ${hasVerb ? 'starts with action' : 'needs a stronger action verb'} and ${hasMetric ? 'includes measurable evidence' : 'would be easier to trust if you added a number, time frame, or result'}. Students often undersell their work, so this tool turns a basic bullet into something that sounds more specific and recruiter-friendly.`,
+      summary: hasMetric && hasOutcome
+        ? 'This bullet has a solid base, but the wording can still become sharper and easier to scan.'
+        : 'This bullet shows experience, but it still needs stronger proof and clearer impact to stand out.',
+      explanation: `The feedback is checking for four things: action, context, evidence, and outcome. In your current line, ${hasVerb ? 'the action is visible' : 'the action is still too soft'}, ${hasContext ? 'the reader gets some context' : 'the context is still thin'}, ${hasMetric ? 'there is measurable proof' : 'there is no concrete measurement yet'}, and ${hasOutcome ? 'the result is fairly clear' : 'the result is not obvious yet'}. Good resume bullets help a recruiter understand contribution and impact in one quick read.`,
       rewriteTitle: 'Improved resume bullet',
       rewrite: improvedBullet,
-      reasons: [
-        'It makes your contribution easier to understand in a few seconds.',
-        hasMetric ? 'It keeps the evidence that makes the bullet believable.' : 'It highlights where adding a number would make the bullet stronger.',
-        'It uses clearer professional language without making the experience sound fake.',
-      ],
-      nextSteps: [
-        hasMetric ? 'Keep the number, but make sure it is accurate and easy to explain in an interview.' : 'Add one number: users helped, hours saved, events run, or percent improvement.',
-        hasOutcome ? 'Keep the outcome at the end of the bullet so the result is easy to scan.' : 'End with the result of your work so the bullet shows impact, not just activity.',
-      ],
+      firstListTitle: 'What is already working',
+      firstListItems: workingItems,
+      secondListTitle: 'What to improve next',
+      secondListItems: improvementItems,
     });
   };
 
   const buildJobDemo = (inputText) => {
     const normalized = inputText.toLowerCase();
     const keywordGroups = {
-      communication: ['communicate', 'communication', 'present', 'collaborate', 'cross-functional'],
-      execution: ['build', 'ship', 'execute', 'deliver', 'own', 'manage'],
-      analysis: ['analyze', 'data', 'metrics', 'research', 'insights'],
-      technical: ['python', 'react', 'sql', 'api', 'ai', 'machine learning'],
+      communication: ['communicate', 'communication', 'present', 'collaborate', 'cross-functional', 'stakeholder'],
+      execution: ['build', 'ship', 'execute', 'deliver', 'own', 'manage', 'coordinate'],
+      analysis: ['analyze', 'analysis', 'data', 'metrics', 'research', 'insights', 'reporting'],
+      technical: ['python', 'react', 'sql', 'excel', 'api', 'ai', 'machine learning', 'tableau'],
     };
-
+    const responsibilities = ['support', 'create', 'develop', 'maintain', 'design', 'lead', 'improve', 'prepare'];
     const matchedGroups = Object.entries(keywordGroups)
       .filter(([, words]) => words.some((word) => normalized.includes(word)))
       .map(([group]) => group);
+    const matchedResponsibilities = responsibilities.filter((word) => normalized.includes(word));
+    const topKeywords = extractTopKeywords(inputText, 4);
+    const yearsMatch = inputText.match(/(\d+)\+?\s*(years?|yrs?)/i);
+    const skillSignals = [];
+    const responseSteps = [];
 
-    const friendlySummary = matchedGroups.length
-      ? `This role mainly asks for ${matchedGroups.join(', ')}, which means the company wants someone who can contribute quickly and explain their work clearly.`
-      : 'This role is asking for someone who can do the work, communicate clearly, and show evidence that they can learn fast.';
+    if (matchedGroups.includes('technical')) {
+      skillSignals.push('There is a clear technical expectation, so your application should show tools, systems, or projects you have actually used.');
+    }
+
+    if (matchedGroups.includes('analysis')) {
+      skillSignals.push('The posting emphasizes analysis, which means the employer likely cares about how you interpret information, not just that you can collect it.');
+    }
+
+    if (matchedGroups.includes('communication')) {
+      skillSignals.push('Communication is part of the role, so you should show examples of presenting, collaborating, or explaining work clearly.');
+    }
+
+    if (matchedResponsibilities.length) {
+      skillSignals.push(`The verbs in the posting suggest ownership around ${listWords(matchedResponsibilities.slice(0, 3))}, so the company is likely hiring for execution, not just interest.`);
+    }
+
+    if (!skillSignals.length) {
+      skillSignals.push('The posting reads like a mix of skills, execution, and communication, so the strongest response will connect your experience to each of those signals directly.');
+    }
+
+    responseSteps.push(`Mirror the strongest requirements in your own words, especially around ${listWords((topKeywords.length ? topKeywords : ['problem-solving', 'communication', 'execution']).slice(0, 3))}.`);
+    responseSteps.push('Choose 2 or 3 experiences that prove fit, rather than trying to answer every line in the posting equally.');
+
+    if (yearsMatch) {
+      responseSteps.push(`If the role asks for ${yearsMatch[1]} ${yearsMatch[2]}, show adjacent proof such as projects, leadership, coursework, or internships that reduce the perceived experience gap.`);
+    } else {
+      responseSteps.push('If you do not meet every requirement, focus on transferable proof and explain how quickly you can contribute.');
+    }
+
+    const plainLanguageBreakdown = [];
+
+    if (matchedGroups.includes('technical')) {
+      plainLanguageBreakdown.push('use relevant tools confidently');
+    }
+
+    if (matchedGroups.includes('analysis')) {
+      plainLanguageBreakdown.push('turn information into useful decisions');
+    }
+
+    if (matchedGroups.includes('communication')) {
+      plainLanguageBreakdown.push('communicate clearly with other people');
+    }
+
+    if (matchedGroups.includes('execution')) {
+      plainLanguageBreakdown.push('follow through on work with ownership');
+    }
+
+    const friendlySummary = plainLanguageBreakdown.length
+      ? `In plain language, this role expects someone who can ${listWords(plainLanguageBreakdown)}.`
+      : 'In plain language, this role expects someone who can learn quickly, execute reliably, and explain their work clearly.';
 
     renderDemoCard({
       title: 'Job Translator · Plain-language breakdown',
-      summary: 'The demo is translating recruiter language into something a student can act on right away.',
-      explanation: `${friendlySummary} Instead of reading the posting like a checklist you already failed, the tool reframes it into signals: what skills matter most, what proof they want, and what you should mirror in your resume or cover letter.`,
+      summary: 'This feedback turns the posting into priorities: what matters most, what proof is expected, and how a student should respond.',
+      explanation: `${friendlySummary} Instead of treating the job description like a list of reasons to self-reject, the feedback breaks it into signals: the skills being tested, the kind of examples the employer probably wants to see, and where you should focus tailoring effort first.`,
       rewriteTitle: 'What this job is really asking for',
-      rewrite: `You should show 2-3 examples where you solved a problem, worked with others, and used relevant tools. Mirror important words from the posting, but explain them in your own simple language so your resume sounds clear instead of copied.`,
-      reasons: [
-        'It reduces intimidating job-post wording into a few understandable themes.',
-        'It shows what evidence matters most instead of making students guess.',
-        'It helps students tailor their resume without rewriting everything from scratch.',
-      ],
-      nextSteps: [
-        'Underline 3 keywords in the posting and make sure your resume shows proof for each one.',
-        `Turn one experience into evidence using this requirement: “${cleanSnippet(inputText, 80)}”.`,
-      ],
+      rewrite: `${friendlySummary} The strongest application will not repeat the posting word-for-word; it will prove fit with one or two clear examples that match the employer's priorities.`,
+      firstListTitle: 'What this role emphasizes',
+      firstListItems: skillSignals,
+      secondListTitle: 'How to respond to it',
+      secondListItems: responseSteps,
     });
   };
 
   const buildCoverLetterDemo = (inputText) => {
-    const strongerResponse = `I’m interested in this role because it matches the way I like to work: solving real problems, learning quickly, and turning ideas into useful results. In my experience, ${cleanSnippet(inputText, 110)}, which shows that I can contribute with both initiative and clear communication.`;
+    const normalized = cleanSnippet(inputText, 280);
+    const sentences = splitSentences(normalized);
+    const genericPatterns = [
+      /hard\s*worker/i,
+      /passionate/i,
+      /eager to learn/i,
+      /excited about/i,
+      /great fit/i,
+      /believe i am/i,
+      /fast learner/i,
+    ];
+    const genericHits = genericPatterns.filter((pattern) => pattern.test(inputText));
+    const hasRoleConnection = /\b(role|position|internship|team|company|organization|mission)\b/i.test(inputText);
+    const hasEvidence = detectMetrics(inputText) || detectActionVerb(inputText) || /\b(project|experience|research|team|lead|manage|build|develop)\b/i.test(inputText);
+    const evidenceSentence =
+      sentences.find((sentence) => detectMetrics(sentence) || detectActionVerb(sentence) || /\b(project|research|team|experience|lead|manage|build|develop)\b/i.test(sentence)) ||
+      sentences[0] ||
+      normalized;
+
+    const roleSentence =
+      sentences.find((sentence) => /\b(role|position|internship|team|company|organization|mission)\b/i.test(sentence)) ||
+      sentences[0] ||
+      normalized;
+
+    const cleanedRoleSentence = roleSentence
+      .replace(/\bI am excited about\b/gi, 'I am interested in')
+      .replace(/\bI believe I am\b/gi, 'I believe my experience is')
+      .replace(/\bI want\b/gi, 'I am applying');
+
+    const strongerResponse = hasEvidence
+      ? `${cleanSnippet(cleanedRoleSentence, 140)} ${cleanSnippet(evidenceSentence, 140)} Together, they show a more credible reason that you fit the role.`
+      : `${cleanSnippet(cleanedRoleSentence, 140)} I would strengthen this paragraph by adding one specific example from a project, internship, leadership role, or class assignment to prove why you fit.`;
+
+    const workingItems = [];
+    const improvementItems = [];
+
+    if (hasRoleConnection) {
+      workingItems.push('The draft already points toward the role or opportunity, so it has a direction to build on.');
+    }
+
+    if (hasEvidence) {
+      workingItems.push('There is at least one detail that can be turned into a credible example, which is the strongest part of a cover letter.');
+    }
+
+    if (!workingItems.length) {
+      workingItems.push('The draft shows interest, which is a useful starting point, but it still needs more proof to feel persuasive.');
+    }
+
+    if (genericHits.length) {
+      improvementItems.push('Replace generic phrases like “hard worker” or “eager to learn” with evidence from a real experience.');
+    }
+
+    if (!hasEvidence) {
+      improvementItems.push('Add one concrete example so the letter proves fit instead of only claiming it.');
+    }
+
+    if (!hasRoleConnection) {
+      improvementItems.push('Make the connection to the role, team, or company more explicit so the letter does not feel reusable.');
+    }
+
+    improvementItems.push('Keep the tone professional, but make sure the paragraph still sounds like a person and not a template.');
 
     renderDemoCard({
       title: 'Cover Letter Feedback · Stronger draft',
-      summary: 'The demo is turning a rough cover letter draft into a clearer message that sounds more confident and easier for recruiters to trust.',
-      explanation: 'Students often write cover letters that are too generic or too informal. This tool rewrites the draft so it connects your experience to the role, keeps the tone professional, and makes your value easier to understand without sounding robotic.',
+      summary: 'This feedback is trying to make the paragraph more credible by connecting your interest to actual evidence and clearer role fit.',
+      explanation: `Strong cover letter feedback checks for three things: whether the paragraph sounds tailored, whether it includes proof, and whether the tone feels confident without becoming generic. In your draft, ${hasRoleConnection ? 'the role connection is present' : 'the role connection is still too vague'}, ${hasEvidence ? 'there is at least one usable example' : 'there is not enough concrete evidence yet'}, and ${genericHits.length ? 'some phrases still sound generic' : 'the wording is mostly specific enough to build on'}.`,
       rewriteTitle: 'Improved cover letter paragraph',
       rewrite: strongerResponse,
-      reasons: [
-        'It links your experience to the employer’s needs instead of only talking about interest.',
-        'It sounds more specific, which makes the response feel more genuine.',
-        'It gives recruiters a clearer reason to keep reading your cover letter.',
-      ],
-      nextSteps: [
-        'Replace one general phrase with a specific example or result from your experience.',
-        'Read the paragraph out loud and remove any line that sounds too vague or too formal to be natural.',
-      ],
+      firstListTitle: 'What is already helping',
+      firstListItems: workingItems,
+      secondListTitle: 'What to strengthen next',
+      secondListItems: improvementItems,
     });
   };
 
-  const runDemo = () => {
+  const runDemo = async () => {
     const tool = demoTool.value;
     const inputText = demoInput.value.trim();
 
@@ -483,45 +806,49 @@ if (demoTool && demoInput && runDemoButton && demoOutput) {
 
     runDemoButton.classList.add('is-running');
 
-    window.setTimeout(() => {
+    try {
+      const payload = await requestLiveFeedback(tool, inputText);
+      renderDemoCard(normalizeFeedbackPayload(payload, tool));
+
+      if (demoStatus) {
+        demoStatus.textContent = 'Live AI feedback generated from the API.';
+      }
+    } catch (error) {
       if (tool === 'resume') {
         buildResumeDemo(inputText);
         if (demoStatus) {
-          demoStatus.textContent = 'Resume feedback generated with a clearer explanation and rewrite.';
+          demoStatus.textContent = 'Using built-in resume feedback. Connect the API for live AI reviews.';
         }
-        runDemoButton.classList.remove('is-running');
-        return;
-      }
-
-      if (tool === 'job') {
+      } else if (tool === 'job') {
         buildJobDemo(inputText);
         if (demoStatus) {
-          demoStatus.textContent = 'Job translation generated in plain language for students.';
+          demoStatus.textContent = 'Using built-in job translation. Connect the API for live AI reviews.';
         }
-        runDemoButton.classList.remove('is-running');
-        return;
+      } else {
+        buildCoverLetterDemo(inputText);
+        if (demoStatus) {
+          demoStatus.textContent = 'Using built-in cover letter feedback. Connect the API for live AI reviews.';
+        }
       }
 
-      buildCoverLetterDemo(inputText);
-      if (demoStatus) {
-        demoStatus.textContent = 'Cover letter feedback generated with a stronger explanation and revision.';
-      }
+      console.warn('Falling back to local demo feedback:', error);
+    } finally {
       runDemoButton.classList.remove('is-running');
-    }, 280);
+    }
   };
 
   demoTool.addEventListener('change', () => {
     if (demoTool.value === 'resume') {
-      demoInput.placeholder = 'Paste a resume bullet like: Managed club events for 50 students...';
+      demoInput.placeholder = 'Paste 1-3 resume bullets or a short experience line like: Helped organize 4 campus events for 50 students...';
       return;
     }
 
     if (demoTool.value === 'job') {
-      demoInput.placeholder = 'Paste a job requirement like: Strong communication skills and experience working with data...';
+      demoInput.placeholder = 'Paste a job requirement or short job description like: Strong communication skills and experience working with data...';
       return;
     }
 
-    demoInput.placeholder = 'Paste a cover letter draft like: I want this internship because I am hardworking and eager to learn...';
+    demoInput.placeholder = 'Paste 2-4 cover letter sentences like: I am interested in this internship because...';
   });
 
   runDemoButton.addEventListener('click', runDemo);

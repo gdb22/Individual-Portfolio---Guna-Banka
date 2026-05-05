@@ -31,24 +31,24 @@
         <div class="container">
           <p class="breadcrumb"><a href="index.html">Home</a> / <span>Projects</span></p>
           <p class="kicker">Project Portfolio</p>
-          <h1>AI tools built for real student job-market needs</h1>
+          <h1>AI tools designed around real student career needs</h1>
           <p class="lead">
-            Each project explains the real problem, product workflow, prompts, iterations, improvements, and stack.
+            Each project outlines the problem, product workflow, prompts, iterations, improvements, and technical stack, while also showing how I think about useful AI product design.
           </p>
           <div class="project-jump-nav" aria-label="Jump to a project section">
-            <a class="jump-link" href="#resume-feedback">Resume Tool</a>
-            <a class="jump-link" href="#job-translator">Job Translator</a>
-            <a class="jump-link" href="#cover-letter-feedback">Cover Letter Feedback</a>
-            <a class="jump-link" href="#student-loan-site">Student Loans</a>
+            <a class="jump-link" href="#resume-feedback">Resume Feedback</a>
+            <a class="jump-link" href="#job-translator">Job Translation</a>
+            <a class="jump-link" href="#cover-letter-feedback">Cover Letter Review</a>
+            <a class="jump-link" href="#student-loan-site">Student Loan Tool</a>
           </div>
         </div>
       </section>
 
       <section class="section" id="resume-feedback">
         <div class="container card">
-          <p class="mini-label">Use this section to review the problem, workflow, example output, and reflection.</p>
-          <h2>Project Title: AI Resume Feedback Tool</h2>
-          <p><strong>One-line description:</strong> AI reviewer that upgrades student resumes for internship relevance and clarity.</p>
+          <p class="mini-label">This section highlights the problem, workflow, example output, and reflection.</p>
+          <h2>AI Resume Feedback Tool</h2>
+          <p><strong>One-line description:</strong> AI review tool that helps students turn underdeveloped resumes into clearer, stronger internship-ready materials.</p>
           <button class="screenshot screenshot-trigger" type="button" data-lightbox-src="images/resume-feedback-demo.svg" data-lightbox-alt="Mock demo of the AI Resume Feedback Tool showing resume scoring and rewritten bullet suggestions" aria-label="Open larger demo image for AI Resume Feedback Tool">
             <img
               class="project-demo-image"
@@ -58,16 +58,16 @@
           </button>
           <div class="project-visual-note">
             <p class="project-visual-label">What this visual shows</p>
-            <p>The mockup highlights the full feedback loop: resume scoring, a before-to-after bullet rewrite, recruiter-facing value, and the next improvement a student should make.</p>
+            <p>The mockup highlights a more complete coaching experience: section-by-section resume feedback, specific examples of weak wording, stronger rewrites with measurable outcomes, and a ranked list of what the student should fix first.</p>
           </div>
           <h3>Problem</h3>
-          <p><strong>What issue are you solving?</strong> Students submit resumes that are too generic, weak on impact, and hard for recruiters to scan quickly.</p>
+          <p><strong>What issue are you solving?</strong> Many students submit resumes that are too generic, light on measurable impact, and difficult for recruiters to evaluate quickly.</p>
 
           <h3>Solution</h3>
           <p>
-            <strong>What you built:</strong> A resume feedback app that scores sections, flags weak bullets, and generates targeted rewrites.
+            <strong>What you built:</strong> A resume feedback application that scores sections, flags weak bullet points, and generates targeted rewrites.
           </p>
-          <p><strong>My role:</strong> designed flow, wrote prompts, built evaluation rubric, and tested output quality.</p>
+          <p><strong>My role:</strong> Designed the workflow, wrote prompts, built the evaluation rubric, and tested whether the feedback felt genuinely useful to students.</p>
           <p><strong>Tools:</strong> React, OpenAI API, prompt templates, deployed web prototype.</p>
 
           <h3>How it works</h3>
@@ -77,14 +77,16 @@
             <li><strong>Output:</strong> Improved bullets, section scores, and a prioritized fix list.</li>
           </ul>
 
-          <h3>Example Output</h3>
+          <h3>Example output</h3>
           <div class="output-box">
             <p><strong>Before:</strong> “Worked on club projects and helped organize events.”</p>
             <p><strong>After:</strong> “Coordinated 4 club projects and 2 campus events, improving attendance by 35% through targeted outreach.”</p>
+            <p><strong>Detailed feedback:</strong> “Your resume shows involvement, but it does not yet show enough impact. Phrases like ‘worked on’ and ‘helped’ are too broad, so a recruiter cannot quickly understand your contribution. The stronger version improves this by using a clear action verb, giving context, and adding a measurable result. To make the rest of the resume just as strong, focus on replacing passive language, adding numbers wherever possible, and prioritizing bullets that show leadership, ownership, or technical skill. The goal is not just to sound better, but to help the student present their experience with more confidence and clarity.”</p>
+            <p><strong>Top recommendations:</strong> Quantify outcomes, shorten long bullets, move the most relevant experience higher, and tailor keywords to the internship description.</p>
             <p><strong>Result:</strong> Resume impact score improved from 5.8/10 to 8.1/10 in the prototype rubric.</p>
           </div>
 
-          <h3>AI Workflow</h3>
+          <h3>AI workflow</h3>
           <h4>Prompts</h4>
           <div class="prompt-box">
             “You are a university career coach. Review this resume for a sophomore applying to software internships.
@@ -103,15 +105,15 @@
           </ul>
 
           <h3>Reflection</h3>
-          <p><strong>What I learned / what I’d improve:</strong> Strong constraints make outputs more useful. Next, I would add ATS keyword matching and side-by-side version compare for faster editing.</p>
+          <p><strong>What I learned / what I’d improve:</strong> Strong constraints make AI output significantly more useful. I also learned that students respond better when feedback explains why something is weak, not just how to rewrite it. Next, I would add ATS keyword matching and a side-by-side comparison view to support faster editing.</p>
         </div>
       </section>
 
       <section class="section" id="job-translator">
         <div class="container card">
-          <p class="mini-label">Use this section to review the problem, workflow, example output, and reflection.</p>
-          <h2>Project Title: AI Job Description Translator</h2>
-          <p><strong>One-line description:</strong> Translates dense job postings into clear student-ready requirements and action plans.</p>
+          <p class="mini-label">This section highlights the problem, workflow, example output, and reflection.</p>
+          <h2>AI Job Description Translator</h2>
+          <p><strong>One-line description:</strong> Translates dense job postings into clear, student-ready requirements and practical next steps.</p>
           <button class="screenshot screenshot-trigger" type="button" data-lightbox-src="images/job-translator-demo.svg" data-lightbox-alt="Mock demo of the AI Job Description Translator showing plain-language requirements and action plan" aria-label="Open larger demo image for AI Job Description Translator">
             <img
               class="project-demo-image"
@@ -121,16 +123,16 @@
           </button>
           <div class="project-visual-note">
             <p class="project-visual-label">What this visual shows</p>
-            <p>The mockup explains how a dense posting becomes something usable: plain-language meaning, a student action plan, and clear signals about what proof to show in a resume or cover letter.</p>
+            <p>The mockup shows a stronger interpretation workflow: the tool breaks down dense employer language, explains what the company is really asking for, identifies where the student already has evidence, and highlights the most important gaps to address before applying.</p>
           </div>
           <h3>Problem</h3>
-          <p><strong>What issue are you solving?</strong> Students misread job descriptions and miss key required skills before applying.</p>
+          <p><strong>What issue are you solving?</strong> Students often misinterpret job descriptions and overlook key required skills before applying.</p>
 
           <h3>Solution</h3>
           <p>
-            <strong>What you built:</strong> A translator that extracts job requirements, simplifies language, and creates a practical preparation checklist.
+            <strong>What you built:</strong> A translation tool that extracts job requirements, simplifies employer language, and creates a practical preparation checklist.
           </p>
-          <p><strong>My role:</strong> created extraction logic and student-focused output format.</p>
+          <p><strong>My role:</strong> Created the extraction logic and designed an output format that stays useful for students while remaining easy for recruiters or reviewers to follow.</p>
           <p><strong>Tools:</strong> React, Gemini API, classification prompts, structured JSON output.</p>
 
           <h3>How it works</h3>
@@ -140,14 +142,16 @@
             <li><strong>Output:</strong> Skill checklist, gap summary, and 2-week prep plan.</li>
           </ul>
 
-          <h3>Example Output</h3>
+          <h3>Example output</h3>
           <div class="output-box">
             <p><strong>Required skills:</strong> SQL, dashboarding, stakeholder communication.</p>
             <p><strong>Plain-language summary:</strong> “You need to analyze data, present findings clearly, and work with non-technical teams.”</p>
+            <p><strong>Detailed feedback:</strong> “This posting is looking for more than technical ability. The employer wants someone who can turn data into decisions and explain those decisions to others. SQL is the technical baseline, but dashboarding shows they care about visual communication, and stakeholder communication means they expect you to present insights clearly to people outside a technical team. If a student only focuses on the software tools and ignores the communication side, they will miss a major part of what the role requires.”</p>
+            <p><strong>Gap summary:</strong> “You already show communication strength, but your materials need clearer proof of analytical work. A strong next step would be creating a small dashboard project, writing two resume bullets around findings, and preparing one short explanation of your work for a non-technical audience. This helps the student understand not only what they are missing, but exactly how to close the gap in a manageable way.”</p>
             <p><strong>Action plan:</strong> 6 concrete tasks over 14 days (portfolio project, SQL practice, mock presentation).</p>
           </div>
 
-          <h3>AI Workflow</h3>
+          <h3>AI workflow</h3>
           <h4>Prompts</h4>
           <div class="prompt-box">
             “Read this job posting. Extract required skills, preferred skills, and responsibilities. Return in JSON with
@@ -166,15 +170,15 @@
           </ul>
 
           <h3>Reflection</h3>
-          <p><strong>What I learned / what I’d improve:</strong> Structure matters more than long explanations. Next, I would add job-fit scoring and role comparison between multiple postings.</p>
+          <p><strong>What I learned / what I’d improve:</strong> Clear structure matters more than long explanations. I found that the most valuable output is the kind that reduces overwhelm and gives students a path forward. Next, I would add job-fit scoring and side-by-side role comparison across multiple postings.</p>
         </div>
       </section>
 
       <section class="section" id="cover-letter-feedback">
         <div class="container card">
-          <p class="mini-label">Use this section to review the problem, workflow, example output, and reflection.</p>
-          <h2>Project Title: AI Cover Letter Feedback</h2>
-          <p><strong>One-line description:</strong> Improves cover letters using role-specific context, clearer evidence, and student-friendly revision guidance.</p>
+          <p class="mini-label">This section highlights the problem, workflow, example output, and reflection.</p>
+          <h2>AI Cover Letter Feedback</h2>
+          <p><strong>One-line description:</strong> Improves cover letters using role-specific context, stronger evidence, and revision guidance that feels actionable.</p>
           <button class="screenshot screenshot-trigger" type="button" data-lightbox-src="images/cover-letter-feedback-demo.svg" data-lightbox-alt="Mock demo of the AI Cover Letter Feedback tool showing improved cover letter output" aria-label="Open larger demo image for AI Cover Letter Feedback">
             <img
               class="project-demo-image"
@@ -184,16 +188,16 @@
           </button>
           <div class="project-visual-note">
             <p class="project-visual-label">What this visual shows</p>
-            <p>The mockup frames the tool like a real review experience: weak lines are flagged, the improved paragraph is grounded in evidence, and the student gets a clear next revision step.</p>
+            <p>The mockup frames the tool like a real writing review: generic claims are flagged, the revised paragraph is tied directly to resume evidence, and the student gets clear guidance on how to sound more credible, specific, and aligned with the role.</p>
           </div>
           <h3>Problem</h3>
-          <p><strong>What issue are you solving?</strong> Students write generic cover letters that fail to match the role and do not clearly use evidence from their resume.</p>
+          <p><strong>What issue are you solving?</strong> Students often write generic cover letters that do not align closely enough with the role or clearly use evidence from their resume.</p>
 
           <h3>Solution</h3>
           <p>
-            <strong>What you built:</strong> A cover letter feedback tool that grounds revisions in resume facts and aligns language to job requirements.
+            <strong>What you built:</strong> A cover letter feedback tool that grounds revisions in resume evidence and aligns language with job requirements.
           </p>
-          <p><strong>My role:</strong> built workflow, prompt routing, and quality scoring checks.</p>
+          <p><strong>My role:</strong> Built the workflow, prompt routing, and quality-scoring checks, with a focus on making the feedback sound practical rather than robotic.</p>
           <p><strong>Tools:</strong> React, OpenAI API, response scoring rubric, deployed prototype.</p>
 
           <h3>How it works</h3>
@@ -203,14 +207,16 @@
             <li><strong>Output:</strong> Improved cover letter draft, confidence score, and revision notes.</li>
           </ul>
 
-          <h3>Example Output</h3>
+          <h3>Example output</h3>
           <div class="output-box">
             <p><strong>Before:</strong> “I am excited about this role and believe I am a hard worker.”</p>
             <p><strong>After:</strong> “I’m excited to apply my project coordination experience from leading a 5-person team to deliver a campus analytics project ahead of schedule, and I would bring that same organized approach to this internship.”</p>
+            <p><strong>Detailed feedback:</strong> “The original sentence sounds enthusiastic, but it is too generic to persuade a recruiter. Statements like ‘hard worker’ are common and do not prove fit on their own. The improved version works better because it replaces a vague trait with evidence, shows leadership through a specific example, and connects that example directly to the internship. Strong cover letters do not just express interest; they explain why the candidate is credible for this exact role.”</p>
+            <p><strong>Revision guidance:</strong> Open with role-specific motivation, support claims with one or two concrete examples, and make sure every paragraph answers the question: ‘Why this company, why this role, and why you?’ The strongest letters feel personal, but they are still grounded in proof.</p>
             <p><strong>Result:</strong> Relevance score improved from 6.0/10 to 8.4/10 in internal evaluation.</p>
           </div>
 
-          <h3>AI Workflow</h3>
+          <h3>AI workflow</h3>
           <h4>Prompts</h4>
           <div class="prompt-box">
             “Write a focused cover letter for this internship using the student resume and job description. Keep it under
@@ -229,24 +235,24 @@
           </ul>
 
           <h3>Reflection</h3>
-          <p><strong>What I learned / what I’d improve:</strong> Grounding constraints are essential for trust. Next, I would add plagiarism checks and recruiter-style feedback simulation.</p>
+          <p><strong>What I learned / what I’d improve:</strong> Grounding constraints are essential for trust and credibility. I also learned that students need feedback that sounds encouraging without becoming vague. Next, I would add plagiarism checks and recruiter-style feedback simulation.</p>
         </div>
       </section>
 
       <section class="section" id="student-loan-site">
         <div class="container card">
-          <p class="mini-label">A separate student-support website focused on debt understanding and financial guidance.</p>
-          <h2>Other ways I help students: Building a website to help students with student loan</h2>
-          <p><strong>One-line description:</strong> Interactive student loan website that estimates repayment time through a simple, focused estimator.</p>
+          <p class="mini-label">A separate student-support website focused on debt awareness and financial guidance.</p>
+          <h2>Additional student-support work: Student loan guidance website</h2>
+          <p><strong>One-line description:</strong> Interactive student loan website that estimates repayment timelines through a simple, focused calculator.</p>
           <a class="screenshot screenshot-trigger" href="student-loans.html" aria-label="Open the student loan estimator page">
             <img class="project-demo-image" src="images/student-loan-estimator-demo.svg" alt="Preview of the student loan estimator page with repayment estimate cards" />
           </a>
           <h3>Problem</h3>
-          <p><strong>What issue are you solving?</strong> Student debt often feels abstract. Many students do not understand how repayment timelines stretch as balances increase.</p>
+          <p><strong>What issue are you solving?</strong> Student debt often feels abstract, and many students do not understand how repayment timelines expand as balances increase.</p>
 
           <h3>Solution</h3>
           <p><strong>What you built:</strong> A student loan estimator that turns debt ranges into a personal repayment estimate and shows how payoff windows expand as balances grow.</p>
-          <p><strong>My role:</strong> built the interactive estimator experience, explained the dataset clearly, and simplified the product around one student-friendly task.</p>
+          <p><strong>My role:</strong> Built the interactive estimator experience, explained the dataset clearly, and simplified the product around one focused student task.</p>
           <p><strong>Live website:</strong> <a class="project-link" href="student-loans.html">Visit the student loan website</a></p>
         </div>
       </section>
